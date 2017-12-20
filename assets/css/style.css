@@ -1,0 +1,43 @@
+h1, h2, h3 {
+  text-align: center;
+}
+
+.timer-box {
+  height: 100px;
+  width: 300px;
+  background-color: #f72ad5;
+  color: #ffffff;
+  text-align: center;
+  font-size: 34px;
+  padding: 25px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+button {
+  margin: 0 auto;
+  border: 1px solid #f72ad5;
+  color: #f72ad5;
+}
+
+.question-box {
+  height: 400px;
+  width: 80%;
+  border: 1px solid #f72ad5;
+  margin: 0 auto;
+}
+
+.game-area {
+  margin-top: 40px;
+}
+
+#question {
+  text-align: center;
+  font-size: 24px;
+}
+
+#answers {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 25px;
+}
