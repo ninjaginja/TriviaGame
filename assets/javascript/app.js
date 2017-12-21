@@ -39,15 +39,36 @@ window.onload = function() {
     },
   ];
 
-  // Create timer function
+  // Create timer function, set to 7 seconds
 
   // When player clicks start button, begin game
   $("#play-button").on("click", function() {
 
     // For loop to display questions and answer options
     for (var i = 0; i < questions.length; i++) {
-      $("")
 
+      // Start timer
+
+      // Display question
+      $("#question").html(questions[i].question);
+
+      // Display guesses with for loop
+      for (var j = 0; j < questions[i].guesses.length; j++) {
+        var guessButton = $("<button>");
+        guessButton.attr("class", "guess-box");
+        guessButton.text(questions[i].guesses[j]);
+        $("#guesses").append(guessButton);
+      }
+
+
+
+      return;
+
+      // If statement to detect if player clicks on correct answer before time runs out, display alert to congratulate, wait a few seconds, go to next question
+
+        // Else if player guesses incorrectly before time runs out, display "Sorry" alert, give correct answer, wait a fdwe seconds, and go to next question
+
+        // Else time runs out, display alert, wait a few seconds, and go to next question
 
 
     };
