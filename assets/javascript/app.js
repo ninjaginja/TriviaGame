@@ -56,21 +56,34 @@ window.onload = function() {
       for (var j = 0; j < questions[i].guesses.length; j++) {
         var guessButton = $("<button>");
         guessButton.attr("class", "guess-box");
+        guessButton.attr("id", questions[i].guesses[j]);
         guessButton.text(questions[i].guesses[j]);
         $("#guesses").append(guessButton);
       }
 
+      $(".guess-box").on("click", function() {
+        var userGuess = $(this).attr("id");
 
-
-      return;
-
-      // If statement to detect if player clicks on correct answer before time runs out, display alert to congratulate, wait a few seconds, go to next question
-
+        // If statement to detect if player clicks on correct answer before time runs out, display alert to congratulate, wait a few seconds, go to next question
+        if (userGuess === questions[i].correctAnswer) {
+          alert ("CORRECT! " + questions[i].explanation);
+        }
         // Else if player guesses incorrectly before time runs out, display "Sorry" alert, give correct answer, wait a fdwe seconds, and go to next question
+          else if (userGuess != questions[i].correctAnswer) {
+            alert ("NOPE, YOU'RE WRONG! " + questions[i].explanation);
+          }
+
+      });
+
+
+
+
+
+
 
         // Else time runs out, display alert, wait a few seconds, and go to next question
 
-
+          return;
     };
 
   });
