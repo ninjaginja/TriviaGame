@@ -6,7 +6,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.timer-box {
+#timer-box {
   height: 100px;
   width: 300px;
   border: 2px solid #f72ad5;
@@ -23,7 +23,7 @@ h1, h2, h3 {
 }
 
 button {
-  padding: 10px; 
+  padding: 10px;
   color: #ffffff;
   background-color: #f72ad5;
 }

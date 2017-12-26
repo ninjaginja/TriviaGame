@@ -37,55 +37,134 @@ window.onload = function() {
       correctAnswer: "Mt. Chimborazo",
       explanation: "Although Mt. Everest has the highest altitude in terms of sea level on the planet, because of the equatorial bulge Mount Chimborazo (Ecuador) is the closest to the moon.",
     },
+
+    {
+      question: "What is America's largest city by surface area?",
+      guesses: ["Yukatat", "Buford", "New York", "Los Angeles"],
+      correctAnswer: "Yukatat",
+      explanation: "America's largest city (by landmass) is Yakutat, on a glacier-surrounded bay in southern Alaska. It may only have 660 residents, but it's six times as big as Rhode Island!",
+    },
+
+    {
+      question: "What is the fastest flowing river in the world?",
+      guesses: ["Mississippi", "Yangtze", "Amazon", "Congo"],
+      correctAnswer: "Amazon",
+      explanation: "The fastest flowing river in the world is the Amazon River. At the height of the wet season, the current can reach a speed of 7 km/hr.",
+    },
+
+    {
+      question: "How many countries are there in Africa?",
+      guesses: ["42", "63", "39", "54"],
+      correctAnswer: "54",
+      explanation: "Africa, the planet's second largest continent and the second most-populous continent (after Asia), consists of 54 individual countries, and Western Sahara, a member state of the African Union whose statehood is disputed by Morocco.",
+    },
   ];
 
-  // Create timer function, set to 7 seconds
+// Variable to cycle through questions
+  var currentQuestion = 0;
 
-  // When player clicks start button, begin game
-  $("#play-button").on("click", function() {
 
-    // For loop to display questions and answer options
-    for (var i = 0; i < questions.length; i++) {
+  // Stopwatch object with reset, start, stop functions
+  var timer = 7;
+  var timeRemaining;
 
-      // Start timer
+  $("#timer-box").html(timer + " seconds");
 
+  //  The run function sets an interval
+  //  that runs the countDown function once a second.
+  function run() {
+    timeRemaining = setInterval(countDown, 1000);
+  }
+
+  //  The decrement function.
+  function countDown() {
+    timer--;
+
+    // Display on page
+    $("#timer-box").html(timer + " seconds");
+
+    //  Once timer hits zero...
+    if (timer === 0) {
+
+      //  ...run the stop function.
+      stop();
+
+      currentQuestion++;
+      clearQuestion();
+
+      //  Alert the user that time is up.
+      alert("Time's Up!");
+    }
+    }
+
+    function stop() {
+
+      //  Clear timeRemaining
+      clearInterval(timeRemaining);
+      timer = 7;
+    }
+
+    // Function to display question and guesses
+    function displayQuestion() {
       // Display question
-      $("#question").html(questions[i].question);
+      $("#question").html(questions[currentQuestion].question);
 
-      // Display guesses with for loop
-      for (var j = 0; j < questions[i].guesses.length; j++) {
+      // Display guesses
+      for (var i = 0; i < questions[currentQuestion].guesses.length; i++) {
         var guessButton = $("<button>");
         guessButton.attr("class", "guess-box");
-        guessButton.attr("id", questions[i].guesses[j]);
-        guessButton.text(questions[i].guesses[j]);
+        guessButton.attr("id", questions[currentQuestion].guesses[i]);
+        guessButton.text(questions[currentQuestion].guesses[i]);
         $("#guesses").append(guessButton);
       }
+
+    }
+
+    // Function to stop timer and clear guesses from the div when moving onto next question
+    function clearQuestion() {
+      stop();
+      $("#timer-box").html(timer + " seconds");
+      $("#question").empty();
+      $("#guesses").empty();
+    }
+
+    // Function to check if guess matches correct answer
+    function answerCheck() {
 
       $(".guess-box").on("click", function() {
         var userGuess = $(this).attr("id");
 
         // If statement to detect if player clicks on correct answer before time runs out, display alert to congratulate, wait a few seconds, go to next question
-        if (userGuess === questions[i].correctAnswer) {
-          alert ("CORRECT! " + questions[i].explanation);
+        if (userGuess === questions[currentQuestion].correctAnswer && timer > 0) {
+          alert ("CORRECT! " + questions[currentQuestion].explanation);
+          currentQuestion++;
+          clearQuestion();
         }
-        // Else if player guesses incorrectly before time runs out, display "Sorry" alert, give correct answer, wait a fdwe seconds, and go to next question
-          else if (userGuess != questions[i].correctAnswer) {
-            alert ("NOPE, YOU'RE WRONG! " + questions[i].explanation);
-          }
-
+        // Else if player guesses incorrectly before time runs out, display "Sorry" alert, give correct answer, wait a few seconds, and go to next question
+        else if (userGuess != questions[currentQuestion].correctAnswer && timer > 0) {
+          alert ("NOPE, YOU'RE WRONG! The correct answer is: " + questions[currentQuestion].explanation);
+          currentQuestion++;
+          clearQuestion();
+        }
       });
+    }
 
 
+  // Game function - start when player clicks play button
+  $("#play-button").on("click", function() {
 
+    // Start timer
+    run();
 
+    // Display question and guesses
+    displayQuestion();
 
-
-
-        // Else time runs out, display alert, wait a few seconds, and go to next question
-
-          return;
-    };
+    // Check for correct answer
+    answerCheck();
 
   });
+
+
+
 
 };
