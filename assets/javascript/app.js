@@ -156,19 +156,26 @@ window.onload = function() {
 
   // Game function - start when player clicks play button
   $("#play-button").on("click", function() {
-    // Clear results section
-    $("#results").empty();
 
-    // Start timer
-    run();
+    // Ensures it doesn't error out after last question in array - will loop back to first question
+    if (currentQuestion <= questions.length - 1) {
+      // Clear results section
+      $("#results").empty();
 
-    // Display question and guesses
-    displayQuestion();
+      // Start timer
+      run();
 
-    // Check for correct answer
-    answerCheck();
+      // Display question and guesses
+      displayQuestion();
 
-  });
+      // Check for correct answer
+      answerCheck();
+    } else {
+      currentQuestion = 0;
+      $("#results").html("<h3>YOU SHOULD TAKE A REST!</h3><br><p><strong>That's all the knowledge we can handle for now.</strong></p>")
+    }
+
+});
 
 
 
