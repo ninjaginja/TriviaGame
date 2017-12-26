@@ -90,10 +90,11 @@ window.onload = function() {
       stop();
 
       currentQuestion++;
-      clearQuestion();
+      reset();
 
       //  Alert the user that time is up.
-      alert("Time's Up!");
+      // alert("Time's Up!");
+      $("#results").html("<h3>TIME'S UP!</h3><br><p><strong>CORRECT ANSWER</strong></p><p>" + questions[currentQuestion].explanation + "</p>")
     }
     }
 
@@ -120,8 +121,8 @@ window.onload = function() {
 
     }
 
-    // Function to stop timer and clear guesses from the div when moving onto next question
-    function clearQuestion() {
+    // Function to reset timer and clear guesses from the div when moving onto next question
+    function reset() {
       stop();
       $("#timer-box").html(timer + " seconds");
       $("#question").empty();
@@ -132,19 +133,22 @@ window.onload = function() {
     function answerCheck() {
 
       $(".guess-box").on("click", function() {
+
         var userGuess = $(this).attr("id");
 
         // If statement to detect if player clicks on correct answer before time runs out, display alert to congratulate, wait a few seconds, go to next question
-        if (userGuess === questions[currentQuestion].correctAnswer && timer > 0) {
-          alert ("CORRECT! " + questions[currentQuestion].explanation);
+        if (userGuess === questions[currentQuestion].correctAnswer) {
+          // alert ("CORRECT! " + questions[currentQuestion].explanation);
+          $("#results").html("<h3>YOU'RE CORRECT!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
           currentQuestion++;
-          clearQuestion();
+          reset();
         }
         // Else if player guesses incorrectly before time runs out, display "Sorry" alert, give correct answer, wait a few seconds, and go to next question
-        else if (userGuess != questions[currentQuestion].correctAnswer && timer > 0) {
-          alert ("NOPE, YOU'RE WRONG! The correct answer is: " + questions[currentQuestion].explanation);
+        else if (userGuess != questions[currentQuestion].correctAnswer) {
+          // alert ("NOPE, YOU'RE WRONG! The correct answer is: " + questions[currentQuestion].explanation);
+          $("#results").html("<h3>NOPE, YOU'RE WRONG!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
           currentQuestion++;
-          clearQuestion();
+          reset();
         }
       });
     }
@@ -152,6 +156,8 @@ window.onload = function() {
 
   // Game function - start when player clicks play button
   $("#play-button").on("click", function() {
+    // Clear results section
+    $("#results").empty();
 
     // Start timer
     run();
