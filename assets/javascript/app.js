@@ -63,7 +63,6 @@ window.onload = function() {
 // Variable to cycle through questions
   var currentQuestion = 0;
 
-
   // Stopwatch object with reset, start, stop functions
   var timer = 7;
   var timeRemaining;
@@ -94,9 +93,9 @@ window.onload = function() {
 
       //  Alert the user that time is up.
       // alert("Time's Up!");
-      $("#results").html("<h3>TIME'S UP!</h3><br><p><strong>CORRECT ANSWER</strong></p><p>" + questions[currentQuestion].explanation + "</p>")
+      $("#results").html("<h3 class = 'wrong-answer'>TIME'S UP!</h3><br><p><strong>CORRECT ANSWER</strong></p><p>" + questions[currentQuestion].explanation + "</p>")
     }
-    }
+  }
 
     function stop() {
 
@@ -118,7 +117,6 @@ window.onload = function() {
         guessButton.text(questions[currentQuestion].guesses[i]);
         $("#guesses").append(guessButton);
       }
-
     }
 
     // Function to reset timer and clear guesses from the div when moving onto next question
@@ -139,14 +137,14 @@ window.onload = function() {
         // If statement to detect if player clicks on correct answer before time runs out, display alert to congratulate, wait a few seconds, go to next question
         if (userGuess === questions[currentQuestion].correctAnswer) {
           // alert ("CORRECT! " + questions[currentQuestion].explanation);
-          $("#results").html("<h3>YOU'RE CORRECT!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
+          $("#results").html("<h3 class = 'correct-answer'>RIGHT ON!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
           currentQuestion++;
           reset();
         }
         // Else if player guesses incorrectly before time runs out, display "Sorry" alert, give correct answer, wait a few seconds, and go to next question
         else if (userGuess != questions[currentQuestion].correctAnswer) {
           // alert ("NOPE, YOU'RE WRONG! The correct answer is: " + questions[currentQuestion].explanation);
-          $("#results").html("<h3>NOPE, YOU'RE WRONG!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
+          $("#results").html("<h3 class = 'wrong-answer'>NOPE, YOU'RE WRONG!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
           currentQuestion++;
           reset();
         }
@@ -157,7 +155,7 @@ window.onload = function() {
   // Game function - start when player clicks play button
   $("#play-button").on("click", function() {
 
-    // Ensures it doesn't error out after last question in array - will loop back to first question
+    // Loop back to first question if player completes all questions
     if (currentQuestion <= questions.length - 1) {
       // Clear results section
       $("#results").empty();

@@ -1,21 +1,61 @@
-header {
-  padding: 30px;
+body {
+  background-image: url(../images/world-map.jpg);
+  background-repeat: no-repeat;
+  opacity: 0.85;
 }
 
-h1, h2, h3 {
+.main {
+  background-color: #ffffff;
+  padding: 3% 10% 20% 10%;
+}
+
+header {
+  /* margin-top: 6%; */
+  padding: 50px ;
+  background-color: #D1F3FC;
+}
+
+h1 {
   text-align: center;
+  color: #464d59;
+  font-family: 'Cinzel', serif;
+  font-size: 48px;
+}
+
+h2 {
+  text-align: center;
+  color: #464d59;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+h3 {
+  text-align: center;
+  color: #1C5FD8;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+p {
+  text-align: center;
+  font-size: 24px;
+  color: #464d59;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 #timer-box {
-  height: 100px;
+  height: 100%;
   width: 300px;
-  border: 2px solid #f72ad5;
-  color: #f72ad5;
+  border: 2px solid #1C5FD8;
+  color: #C83327;
   text-align: center;
-  font-size: 34px;
-  padding: 25px;
+  padding: 15px;
   margin: 0 auto;
   margin-bottom: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
 }
 
 #play-button {
@@ -25,7 +65,10 @@ h1, h2, h3 {
 button {
   padding: 10px;
   color: #ffffff;
-  background-color: #f72ad5;
+  background-color: #464d59;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
 }
 
 .question-box {
@@ -51,8 +94,16 @@ button {
 }
 
 .guess-box {
-  background-color: #f72ad5;
+  background-color: #464d59;
   color: #ffffff;
   padding: 10px;
   margin: 5px;
+}
+
+.correct-answer {
+  color: #4F7F28;
+}
+
+.wrong-answer {
+  color: #C83327;
 }
