@@ -87,13 +87,13 @@ window.onload = function() {
 
       //  ...run the stop function.
       stop();
-
-      currentQuestion++;
+    
       reset();
 
       //  Alert the user that time is up.
       // alert("Time's Up!");
       $("#results").html("<h3 class = 'wrong-answer'>TIME'S UP!</h3><br><p><strong>CORRECT ANSWER</strong></p><p>" + questions[currentQuestion].explanation + "</p>")
+      currentQuestion++;
     }
   }
 
@@ -134,16 +134,14 @@ window.onload = function() {
 
         var userGuess = $(this).attr("id");
 
-        // If statement to detect if player clicks on correct answer before time runs out, display alert to congratulate, wait a few seconds, go to next question
+        // If statement to detect if player clicks on correct answer, display congrats message in results div
         if (userGuess === questions[currentQuestion].correctAnswer) {
-          // alert ("CORRECT! " + questions[currentQuestion].explanation);
           $("#results").html("<h3 class = 'correct-answer'>RIGHT ON!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
           currentQuestion++;
           reset();
         }
-        // Else if player guesses incorrectly before time runs out, display "Sorry" alert, give correct answer, wait a few seconds, and go to next question
+        // Else if player guesses incorrectly, display congrats message in results div
         else if (userGuess != questions[currentQuestion].correctAnswer) {
-          // alert ("NOPE, YOU'RE WRONG! The correct answer is: " + questions[currentQuestion].explanation);
           $("#results").html("<h3 class = 'wrong-answer'>NOPE, YOU'RE WRONG!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
           currentQuestion++;
           reset();
