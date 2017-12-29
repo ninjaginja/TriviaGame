@@ -97,6 +97,7 @@ window.onload = function() {
       // alert("Time's Up!");
       $("#results").html("<h3 class = 'wrong-answer'>TIME'S UP!</h3><br><p><strong>CORRECT ANSWER</strong></p><p>" + questions[currentQuestion].explanation + "</p>")
       currentQuestion++;
+      nextQuestion();
     }
   }
 
@@ -128,12 +129,38 @@ window.onload = function() {
       $("#timer-box").html(timer + " seconds");
       $("#question").empty();
       $("#guesses").empty();
+      $("#results").empty();
+    }
+
+    // Set timeout to advance to next question
+    var delay;
+    function nextQuestion() {
+      if (currentQuestion < questions.length) {
+        delay = setTimeout(function(){
+          reset();
+          run();
+          displayQuestion();
+          answerCheck();
+        }, 7000);
+      } else {
+        delay = setTimeout(function(){
+          answerCheck();
+          currentQuestion = 0;
+          $("#question").empty();
+          $("#guesses").empty();
+          $("#results").html("<h3>GAME OVER</h3><br><p>You got <strong>" + playerScore + "/" + questions.length + "</strong> correct.</p>" );
+          $("#play-button").show();
+          playerScore = 0;
+        }, 7000);
+        }
+      console.log(currentQuestion);
     }
 
     // Function to check if guess matches correct answer
     function answerCheck() {
 
       $(".guess-box").on("click", function() {
+        stop();
 
         var userGuess = $(this).attr("id");
 
@@ -142,13 +169,13 @@ window.onload = function() {
           $("#results").html("<h3 class = 'correct-answer'>RIGHT ON!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
           playerScore++;
           currentQuestion++;
-          reset();
+          nextQuestion();
         }
         // Else if player guesses incorrectly, display congrats message in results div
         else if (userGuess != questions[currentQuestion].correctAnswer) {
           $("#results").html("<h3 class = 'wrong-answer'>NOPE, YOU'RE WRONG!</h3><br><p>" + questions[currentQuestion].explanation + "</p>");
           currentQuestion++;
-          reset();
+          nextQuestion();
         }
       });
     }
@@ -157,23 +184,20 @@ window.onload = function() {
   // Game function - start when player clicks play button
   $("#play-button").on("click", function() {
 
-    // Loop back to first question if player completes all questions
-    if (currentQuestion <= questions.length - 1) {
-      // Clear results section
-      $("#results").empty();
+    // Disable play button
+    $(this).hide();
 
-      // Start timer
-      run();
+    // Clear contents
+    reset();
 
-      // Display question and guesses
-      displayQuestion();
+    // Start timer
+    run();
 
-      // Check for correct answer
-      answerCheck();
-    } else {
-      currentQuestion = 0;
-      $("#results").html("<h3>YOU SHOULD TAKE A REST!</h3><br><p>That's all the knowledge we can handle for now.</p><p>You got <strong>" + playerScore + "/" + questions.length + "</strong> correct.</p>" )
-    }
+    // Display question and guesses
+    displayQuestion();
+
+    // Check for correct answer
+    answerCheck();
 
 });
 
