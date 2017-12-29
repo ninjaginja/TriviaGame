@@ -72,8 +72,7 @@ window.onload = function() {
 
   $("#timer-box").html(timer + " seconds");
 
-  //  The run function sets an interval
-  //  that runs the countDown function once a second.
+  //  The run function sets an interval that runs the countDown function once a second.
   function run() {
     timeRemaining = setInterval(countDown, 1000);
   }
@@ -94,7 +93,6 @@ window.onload = function() {
       reset();
 
       //  Alert the user that time is up.
-      // alert("Time's Up!");
       $("#results").html("<h3 class = 'wrong-answer'>TIME'S UP!</h3><br><p><strong>CORRECT ANSWER</strong></p><p>" + questions[currentQuestion].explanation + "</p>")
       currentQuestion++;
       nextQuestion();
@@ -143,17 +141,16 @@ window.onload = function() {
           answerCheck();
         }, 7000);
       } else {
-        delay = setTimeout(function(){
-          answerCheck();
-          currentQuestion = 0;
-          $("#question").empty();
-          $("#guesses").empty();
-          $("#results").html("<h3>GAME OVER</h3><br><p>You got <strong>" + playerScore + "/" + questions.length + "</strong> correct.</p>" );
-          $("#play-button").show();
-          playerScore = 0;
-        }, 7000);
+          delay = setTimeout(function(){
+            answerCheck();
+            currentQuestion = 0;
+            $("#question").empty();
+            $("#guesses").empty();
+            $("#results").html("<h3>GAME OVER</h3><br><p>You got <strong>" + playerScore + "/" + questions.length + "</strong> correct.</p>" );
+            $("#play-button").show();
+            playerScore = 0;
+          }, 7000);
         }
-      console.log(currentQuestion);
     }
 
     // Function to check if guess matches correct answer
